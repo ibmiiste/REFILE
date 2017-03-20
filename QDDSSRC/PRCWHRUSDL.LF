@@ -1,0 +1,22 @@
+      *================================================================
+      *
+      *  PRCWHRUSDL: PROCEDURE WHERE USED BY PROCEDURE/LIB/MODULE
+      *
+      *================================================================
+      *  MODIFICATIONS
+      *================================================================
+                R QBNDMIMP                  PFILE(PRCWHRUSDP)
+      *================================================================
+                K IMSYNM
+                K IMLBNM
+                K IMMONM
+      *================================================================
+      *  DSPMOD MODULE(library/module)
+      *    DETAIL(*IMPORT)
+      *    OUTPUT(*OUTFILE)
+      *    OUTFILE(library/PRCWHRUSDP)
+      *
+      *  CRTLF FILE(library/PRCWHRUSDL)
+      *    SRCFILE(library/QDDSSRC)
+      *    SRCMBR(PRCWHRUSDL)
+      *================================================================

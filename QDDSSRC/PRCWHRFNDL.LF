@@ -1,0 +1,20 @@
+      *================================================================
+      *
+      *  PRCWHRFNDL: PROCEDURE WHERE FOUND BY PROCEDURE/LIB/MODULE
+      *
+      *================================================================
+                R QBNDMEXP                  PFILE(PRCWHRFNDP)
+      *================================================================
+                K EXSYNM
+                K EXLBNM
+                K EXMONM
+      *================================================================
+      *  DSPMOD MODULE(library/module)
+      *    DETAIL(*EXPORT)
+      *    OUTPUT(*OUTFILE)
+      *    OUTFILE(LIBRARY/PRCWHRFNDP)
+      *
+      *  CRTLF FILE(LIBRARY/PRCWHRFNDL)
+      *    SRCFILE(LIBRARY/QDDSSRC)
+      *    SRCMBR(PRCWHRFNDL)
+      *================================================================

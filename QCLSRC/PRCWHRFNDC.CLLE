@@ -1,0 +1,85 @@
+/*================================================================================================*/
+/*  Source:   prcwhrfndc - Procedure Where Found                                                  */
+/*                                                                                                */
+/*  Desc:     This module displays/prints modules containing specified procedure.                 */
+/*                                                                                                */
+/*  Input parms:                                                                                  */
+/*            Procedure                                                                           */
+/*            Wild Card                                                                           */
+/*            Output                                                                              */
+/*                                                                                                */
+/*  Output parms:                                                                                 */
+/*            None                                                                                */
+/*                                                                                                */
+/*================================================================================================*/
+             PGM        PARM(&PROCEDURE &WILDCARD &OUTPUT)
+
+             DCL        VAR(&PROCEDURE) TYPE(*CHAR) LEN(256)
+             DCL        VAR(&WILDCARD) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&OUTPUT) TYPE(*CHAR) LEN(10)
+
+             DCL        VAR(&COND) TYPE(*CHAR) LEN(10) VALUE('=')
+             DCL        VAR(&EQUAL) TYPE(*CHAR) LEN(1) VALUE('=')
+             DCL        VAR(&LIKE) TYPE(*CHAR) LEN(4) VALUE('like')
+
+             DCL        VAR(&PERCENT) TYPE(*CHAR) LEN(1) VALUE('%')
+             DCL        VAR(&QUOTE) TYPE(*CHAR) LEN(1) VALUE('''')
+
+
+/*================================================================================================*/
+/* If WILDCARD = *NONE                                                                            */
+/*================================================================================================*/
+             IF         COND(&WILDCARD *EQ '*NONE') THEN(DO)
+                CHGVAR     VAR(&COND) VALUE(&EQUAL)
+                CHGVAR     VAR(&PROCEDURE) VALUE(&QUOTE *TCAT &PROCEDURE *TCAT &QUOTE)
+             ENDDO
+
+
+/*================================================================================================*/
+/* If WILDCARD = *BEFORE                                                                          */
+/*================================================================================================*/
+             IF         COND(&WILDCARD *EQ '*BEFORE') THEN(DO)
+                CHGVAR     VAR(&COND) VALUE(&LIKE)
+                CHGVAR     VAR(&PROCEDURE) VALUE(&QUOTE *TCAT &PERCENT *TCAT &PROCEDURE *TCAT +
+                             &QUOTE)
+             ENDDO
+
+
+/*================================================================================================*/
+/* If WILDCARD = *AFTER                                                                           */
+/*================================================================================================*/
+             IF         COND(&WILDCARD *EQ '*AFTER') THEN(DO)
+                CHGVAR     VAR(&COND) VALUE(&LIKE)
+                CHGVAR     VAR(&PROCEDURE) VALUE(&QUOTE *TCAT &PROCEDURE *TCAT &PERCENT *TCAT +
+                             &QUOTE)
+             ENDDO
+
+
+/*================================================================================================*/
+/* If WILDCARD = *BOTH                                                                            */
+/*================================================================================================*/
+             IF         COND(&WILDCARD *EQ '*BOTH') THEN(DO)
+                CHGVAR     VAR(&COND) VALUE(&LIKE)
+                CHGVAR     VAR(&PROCEDURE) VALUE(&QUOTE *TCAT &PERCENT *TCAT &PROCEDURE *TCAT +
+                             &PERCENT *TCAT &QUOTE)
+             ENDDO
+
+
+/*================================================================================================*/
+/* Execute QMQRY                                                                                  */
+/*================================================================================================*/
+             STRQMQRY   QMQRY(PRCWHRFNDQ) OUTPUT(&OUTPUT) SETVAR((COND &COND) (PATTERN +
+                          &PROCEDURE))
+
+
+ ENDPGM:
+             ENDPGM
+
+
+/*================================================================================================*/
+/*  CRTBNDCL PGM(library/PRCWHRFNDC)                                                              */
+/*           SRCFILE(library/QCLLESRC)                                                            */
+/*           SRCMBR(PRCWHRFNDC)                                                                   */
+/*================================================================================================*/
+
+

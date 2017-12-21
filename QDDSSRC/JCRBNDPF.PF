@@ -1,0 +1,16 @@
+      *-------------------------------------------------------------------------
+      * This program is free software, you can redistribute it and/or modify it
+      * under the terms of the GNU General Public License as published by
+      * the Free Software Foundation. See GNU General Public License for detail.
+      * Copyright (C) 2015   Craig Rutledge  <www.jcrcmds.com>     v5r4
+      *----------------------------------------------------------------
+      * JCRBNDPF - Procedure names list - PF
+      *----------------------------------------------------------------
+     A          R JCRBNDPFR                 TEXT('Procedure Names List')
+     A            JCRBNDDIR     10A         COLHDG('Binding Object')
+     A            JCRBNDDIRL    10A         COLHDG('Binding Lib')
+     A            JCRSRVPGM     10A         COLHDG('Service Pgm')
+     A            JCRSRVPGML    10A         COLHDG('Service Lib')
+     A            JCRMODULE     10A         COLHDG('Module')
+     A            JCRMODULEL    10A         COLHDG('Module lib')
+     A            JCRPROC      256A         COLHDG('Procedure Name')

@@ -1,0 +1,34 @@
+.*-------------------------------------------------------------------*
+.* This program is free software, you can redistribute it and/or     *
+.* modify it under the terms of the GNU General Public License as    *
+.* published by the Free Software Foundation.  See GNU General       *
+.* Public License for detail.                                        *
+.* Copyright (C) 2015   Craig Rutledge  <www.jcrcmds.com>     v5r4   *
+.*--------------------------------------------------------------------
+:PNLGRP.:HELP NAME='JCRBND'.Procedure Names List (JCRBND) - Help
+.*--------------------------------------------------------------------
+:P.This JCR command outputs list of procedures/symbols that are exported by selected *BNDDIR,
+*SRVPGM, or *MODULE.:EHELP.
+.*--------------------------------------------------------------------
+:HELP name='JCRBND/BINDING'.Binding Object - Help :XH3.Binding Object (BINDING)
+:P.Name/generic*/*ALL and library of binding object (binding directory, service
+program, or module) for which procedures are to be listed.:EHELP.
+:HELP name='JCRBND/OBJTYPE'.Object Type - Help :XH3.Object Type (OBJTYPE)
+:P.Object type of binding object selected.:EHELP.
+:HELP name='JCRBND/OUTPUT'.Output - Help :XH3.OutPut (OUTPUT)
+:P.Print results or load into outfile or * display the spooled file.:EHELP.
+:HELP name='JCRBND/OUTFILE'.OutFile - Help :XH3.File (OUTFILE)
+:P.File and library where procedure names are to be loaded.:EHELP.
+:HELP name='JCRBND/OUTMBR'.OutMbr - Help :XH3.OutMbr (OUTMBR)
+:P.Database file member that receives output of command.
+:P.The possible name values are:
+:P.:PARML.:PT.:PK def.*FIRST:EPK.
+:PD.The first member in file receives output.  If it does not
+exist, system creates member with name of file
+specified in :HP2.File to receive output:EHP2. prompt (OUTFILE parameter).
+:PT.member-name:PD.Specify name of file member that receives output.  If it
+does not exist, the system creates it.:EPARML.
+:P.The possible values for how information is stored are:
+:P.:PARML.:PT.:PK def.*REPLACE:EPK.
+:PD.The system clears existing member and adds new records.
+:PT.*ADD:PD.The system adds new records to end of the existing records.:EPARML.:EHELP.:EPNLGRP.

@@ -1,0 +1,22 @@
+      *-------------------------------------------------------------------------
+      * This program is free software, you can redistribute it and/or modify it
+      * under the terms of the GNU General Public License as published by
+      * the Free Software Foundation. See GNU General Public License for detail.
+      * Copyright (C) 2015   Craig Rutledge  <www.jcrcmds.com>     v5r4
+      *----------------------------------------------------------------
+      * JCRBNDRP - Procedure names list - PRTF
+      *----------------------------------------------------------------
+      *---                                  PAGESIZE(66 198)  CPI(15)
+     A          R PRTHEAD                   SKIPB(1) SPACEA(1)
+     A                                     2'JCRBNDR'
+     A                                    22'Procedure Names List'
+     A            SCDOW          9A  O   110
+     A                                   120DATE EDTWRD('  /  /  ')
+     A                                   130TIME EDTWRD('  :  :  ')
+     A                                   140'Page'
+     A                                    +1PAGNBR EDTCDE(4) SPACEA(2)
+     A            SCOBJHEAD    100A  O     2SPACEA(2)
+     A            HEADVAR      195A  O     2
+      *----------------------------------------------------------------
+     A          R PRTDETAIL                 SPACEA(1)
+     A            DETAILVAR    195A  O     2

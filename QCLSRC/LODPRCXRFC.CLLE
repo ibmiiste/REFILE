@@ -19,7 +19,7 @@
 /*================================================================================================*/
              CLRPFM     FILE(PRCWHRFNDP)
              CLRPFM     FILE(PRCWHRUSDP)
-
+             Addlible   odrubigny
 /*================================================================================================*/
 /* Create List of All Modules in Specified Libraries                                              */
 /*================================================================================================*/
@@ -40,7 +40,12 @@
                           OUTMBR(*FIRST *ADD)
  WHRUSD:     DSPMOD     MODULE(&ODLBNM/&ODOBNM) DETAIL(*IMPORT) OUTPUT(*OUTFILE) +
                           OUTFILE(PRCWHRUSDP) OUTMBR(*FIRST *ADD)
-
+             IF         COND(&ODOBTP *EQ '*MODULE' *OR &ODOBTP *EQ +
+                          '*SRVPGM' *OR &ODOBTP *EQ '*BNDDIR') THEN(DO)
+                JCRBND     BINDING(&ODLBNM/&ODOBNM) OBJTYPE(&ODOBTP) +
+                             OUTPUT(*OUTFILE) OUTFILE(QGPL/REFPROCED) +
+                             OUTMBR(*FIRST *ADD)
+             ENDDO
              GOTO       CMDLBL(STRPROC)
 
  ENDPROC:

@@ -47,9 +47,9 @@
              MONMSG     MSGID(CPF0864) EXEC(GOTO CMDLBL(ENDPROC))
 
              IF         COND(&ODOBTP *EQ '*MODULE') THEN(DO)
- WHRFND:     DSPMOD     MODULE(&ODLBNM/&ODOBNM) DETAIL(*PROCLIST) +
-                          OUTPUT(*OUTFILE) OUTFILE(PRCWHRFNDP) +
-                          OUTMBR(*FIRST *ADD)
+ WHRFND:        DSPMOD     MODULE(&ODLBNM/&ODOBNM) DETAIL(*EXPORT) +
+                             OUTPUT(*OUTFILE) OUTFILE(PRCWHRFNDP) +
+                             OUTMBR(*FIRST *ADD)
  WHRUSD:     DSPMOD     MODULE(&ODLBNM/&ODOBNM) DETAIL(*IMPORT) +
                           OUTPUT(*OUTFILE) OUTFILE(PRCWHRUSDP) +
                           OUTMBR(*FIRST *ADD)

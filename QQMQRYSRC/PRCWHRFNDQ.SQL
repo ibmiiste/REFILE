@@ -9,6 +9,7 @@
    where exsynm=b.JCRPROC
      and b.JCRSRVPGM<>''
      and exlbnm<>'QRPLOBJ'
+     and b.JCRSRVPGML<>'QRPLOBJ'
+     and b.JCRBNDDIRL<>'QRPLOBJ'
      And trim( exsynm) &COND &PATTERN
 order by exsynm, exlbnm, exmonm
-

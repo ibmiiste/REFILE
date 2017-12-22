@@ -35,7 +35,7 @@
 /* Create List of All Modules in Specified Libraries                          */
 /*============================================================================*/
              DSPOBJD    OBJ(*ALL/*ALL) OBJTYPE(*MODULE *SRVPGM *BNDDIR) +
-                          OUTPUT(*OUTFILE) OUTFILE(QTEhbMP/QADSPOBJ)
+                          OUTPUT(*OUTFILE) OUTFILE(QTEMP/QADSPOBJ)
 
 /*============================================================================*/
 /* Load Procedure Where Found/Where Used                                      */

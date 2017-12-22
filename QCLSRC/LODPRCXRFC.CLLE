@@ -57,7 +57,7 @@
              IF         COND(&ODOBTP *EQ '*MODULE' *OR &ODOBTP *EQ +
                           '*SRVPGM' *OR &ODOBTP *EQ '*BNDDIR') THEN(DO)
                 JCRBND     BINDING(&ODLBNM/&ODOBNM) OBJTYPE(&ODOBTP) +
-                             OUTPUT(*OUTFILE) OUTFILE(QGPL/REFPROCED) +
+                             OUTPUT(*OUTFILE) OUTFILE(REFPROCED) +
                              OUTMBR(*FIRST *ADD)
              ENDDO
              GOTO       CMDLBL(STRPROC)

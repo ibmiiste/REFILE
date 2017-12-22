@@ -1,45 +1,59 @@
-/*================================================================================================*/
-/*  Source:   lodprcxrfc - Load Cross-Reference Files                                             */
-/*                                                                                                */
-/*  Desc:     This module loads the Cross-Reference files.                                        */
-/*                                                                                                */
-/*  Input parms:                                                                                  */
-/*            None                                                                                */
-/*                                                                                                */
-/*  Output parms:                                                                                 */
-/*            None                                                                                */
-/*                                                                                                */
-/*================================================================================================*/
+/*============================================================================*/
+/*  Source:   lodprcxrfc - Load Cross-Reference Files                         */
+/*                                                                            */
+/*  Desc:     This module loads the Cross-Reference files.                    */
+/*                                                                            */
+/*  Input parms:                                                              */
+/*            None                                                            */
+/*                                                                            */
+/*  Output parms:                                                             */
+/*            None                                                            */
+/*                                                                            */
+/*============================================================================*/
+      /* >>PRE-COMPILER<<                                                 */
+      /*   >>CRTCMD<<  CRTBNDCL SRCFILE(&SL/&SF) SRCMBR(&SM);             */
+      /*   >>IMPORTANT<<                                                  */
+      /*     >>PARM<<  PGM(&LI/&OB);                                      */
+      /*     >>PARM<<  OPTION(*EVENTF);                                   */
+      /*     >>PARM<<  DBGVIEW(*ALL);                                     */
+      /*   >>END-IMPORTANT<<                                              */
+      /*   >>EXECUTE<<                                                    */
+      /* >>END-PRE-COMPILER<<                                             */
+
              PGM
              DCLF       FILE(QADSPOBJ)
              MONMSG     MSGID(CPF0000)
 
-/*================================================================================================*/
-/* Clear Cross-Reference Files                                                                    */
-/*================================================================================================*/
+/*============================================================================*/
+/* Clear Cross-Reference Files                                                */
+/*============================================================================*/
              CLRPFM     FILE(PRCWHRFNDP)
              CLRPFM     FILE(PRCWHRUSDP)
-             Addlible   odrubigny
-/*================================================================================================*/
-/* Create List of All Modules in Specified Libraries                                              */
-/*================================================================================================*/
-             DSPOBJD    OBJ(*ALL/*ALL) OBJTYPE(*MODULE) OUTPUT(*OUTFILE) +
-                          OUTFILE(QTEMP/QADSPOBJ)
+             CLRPFM     FILE(REFPROCED)
+             ADDLIBLE   LIB(ODRUBIGNY)
+/*============================================================================*/
+/* Create List of All Modules in Specified Libraries                          */
+/*============================================================================*/
+             DSPOBJD    OBJ(*ALL/*ALL) OBJTYPE(*MODULE *SRVPGM *BNDDIR) +
+                          OUTPUT(*OUTFILE) OUTFILE(QTEhbMP/QADSPOBJ)
 
-/*================================================================================================*/
-/* Load Procedure Where Found/Where Used                                                          */
-/*================================================================================================*/
+/*============================================================================*/
+/* Load Procedure Where Found/Where Used                                      */
+/*============================================================================*/
              OVRDBF     FILE(QADSPOBJ) TOFILE(QTEMP/QADSPOBJ)
 
  STRPROC:
              RCVF
              MONMSG     MSGID(CPF0864) EXEC(GOTO CMDLBL(ENDPROC))
 
+             IF         COND(&ODOBTP *EQ '*MODULE') THEN(DO)
  WHRFND:     DSPMOD     MODULE(&ODLBNM/&ODOBNM) DETAIL(*PROCLIST) +
                           OUTPUT(*OUTFILE) OUTFILE(PRCWHRFNDP) +
                           OUTMBR(*FIRST *ADD)
- WHRUSD:     DSPMOD     MODULE(&ODLBNM/&ODOBNM) DETAIL(*IMPORT) OUTPUT(*OUTFILE) +
-                          OUTFILE(PRCWHRUSDP) OUTMBR(*FIRST *ADD)
+ WHRUSD:     DSPMOD     MODULE(&ODLBNM/&ODOBNM) DETAIL(*IMPORT) +
+                          OUTPUT(*OUTFILE) OUTFILE(PRCWHRUSDP) +
+                          OUTMBR(*FIRST *ADD)
+             ENDDO
              IF         COND(&ODOBTP *EQ '*MODULE' *OR &ODOBTP *EQ +
                           '*SRVPGM' *OR &ODOBTP *EQ '*BNDDIR') THEN(DO)
                 JCRBND     BINDING(&ODLBNM/&ODOBNM) OBJTYPE(&ODOBTP) +
@@ -50,27 +64,18 @@
 
  ENDPROC:
 
-/*================================================================================================*/
-/* Remove Duplicate References                                                                    */
-/*================================================================================================*/
+/*============================================================================*/
+/* Remove Duplicate References                                                */
+/*============================================================================*/
              STRQMQRY   QMQRY(RMVWHRFNDQ)
              STRQMQRY   QMQRY(RMVWHRUSDQ)
 
              RGZPFM     FILE(PRCWHRFNDP)
              RGZPFM     FILE(PRCWHRUSDP)
 
-/*================================================================================================*/
-/* End Program                                                                                    */
-/*================================================================================================*/
+/*============================================================================*/
+/* End Program                                                                */
+/*============================================================================*/
  ENDPGM:
              DLTOVR     FILE(*ALL)
              ENDPGM
-
-
-/*================================================================================================*/
-/*  CRTBNDCL PGM(library/LODPRCXRFC)                                                              */
-/*           SRCFILE(library/QCLLESRC)                                                            */
-/*           SRCMBR(LODPRCXRFC)                                                                   */
-/*================================================================================================*/
-
-
